@@ -3,43 +3,82 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subvention;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubventionRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class SubventionController extends Controller
 {
-    public function create()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): View
     {
-        return view('subventions.create');
+        $subventions = Subvention::paginate();
+
+        return view('subvention.index', compact('subventions'))
+            ->with('i', ($request->input('page', 1) - 1) * $subventions->perPage());
     }
 
-    public function store(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
     {
-        $request->validate([
-            'nom_complet' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'telephone' => 'required|string|max:20',
-            'adresse' => 'required|string|max:255',
-            'type_agriculture' => 'required|string',
-            'type_organisation' => 'required|string',
-            'description_beneficiaire' => 'required|string',
-            'surface_exploitation' => 'nullable|numeric',
-            'type_plantes' => 'nullable|string',
-            'nombre_animaux' => 'nullable|integer',
-            'description_projet' => 'required|string',
-            'montant_demande' => 'required|numeric',
-            'piece_identite' => 'nullable|file|mimes:pdf,jpeg,png|max:2048' // Limite de 2MB
-        ]);
-    
-        // Gestion du fichier
-        if ($request->hasFile('piece_identite')) {
-            $file = $request->file('piece_identite');
-            $path = $file->store('identites', 'public');
-            $request->merge(['piece_identite' => $path]);
-        }
-    
-        Subvention::create($request->all());
-    
-        return redirect()->back()->with('success', 'Demande de subvention envoyée avec succès.');
+        $subvention = new Subvention();
+
+        return view('subvention.create', compact('subvention'));
     }
-    
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(SubventionRequest $request): RedirectResponse
+    {
+        Subvention::create($request->validated());
+
+        return Redirect::route('subventions.index')
+            ->with('success', 'Subvention created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id): View
+    {
+        $subvention = Subvention::find($id);
+
+        return view('subvention.show', compact('subvention'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id): View
+    {
+        $subvention = Subvention::find($id);
+
+        return view('subvention.edit', compact('subvention'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(SubventionRequest $request, Subvention $subvention): RedirectResponse
+    {
+        $subvention->update($request->validated());
+
+        return Redirect::route('subventions.index')
+            ->with('success', 'Subvention updated successfully');
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        Subvention::find($id)->delete();
+
+        return Redirect::route('subventions.index')
+            ->with('success', 'Subvention deleted successfully');
+    }
 }
