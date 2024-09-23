@@ -12,12 +12,7 @@
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Subventions') }}</h1>
                             <p class="mt-2 text-sm text-gray-700">Liste de toutes les {{ __('Subventions') }}.</p>
                         </div>
-                        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a href="{{ route('subventions.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                                {{ __('Add New') }}
-                            </a>
-                        </div>
-                    </div>
+                    </div>  
 
                     <div class="flow-root mt-8">
                         @if($subventions->count())
