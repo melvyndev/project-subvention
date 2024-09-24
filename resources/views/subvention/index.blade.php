@@ -26,8 +26,7 @@
                                                     <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Nom Complet') }}</th>
                                                     <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Email') }}</th>
                                                     <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Type Agriculture') }}</th>
-                                                    <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Description Projet') }}</th>
-                                                    <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Montant Demande') }}</th>
+                                                    <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Montant ') }}</th>
                                                     <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Téléphone') }}</th>
                                                     <th scope="col" class="py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Adresse') }}</th>
                                                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">{{ __('Actions') }}</th>
@@ -40,7 +39,6 @@
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->nom_complet }}</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->email }}</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->type_agriculture }}</td>
-                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->description_projet }}</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->montant_demande }}</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->telephone }}</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $subvention->adresse }}</td>
